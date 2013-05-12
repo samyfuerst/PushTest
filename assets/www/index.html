@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" href="css/jqm.css" />
+<script type="text/javascript" src="cordova-2.6.0.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
+<script src="jquery.mobile-1.3.1.js" type="text/javascript"></script>
+<script type="text/javascript">app.initialize();</script>
+<script type="text/javascript">
+	
+	// result contains any message sent from the plugin call
+function successHandler (result) {
+    alert('result = '+result)
+}
+
+ function onNotificationGCM(e) {
+		alert('aber hallo',e);
+   }
+	
+	$(document).ready(function() {
+	
+	if (device.platform == 'android' || device.platform == 'Android') {
+		pushNotification.register(successHandler, errorHandler,{"senderID":"AIzaSyBmBUVAnclTMnabfLxmbvbaoeeak2YoCbY","ecb":"onNotificationGCM"});
+	} else {
+		pushNotification.register(tokenHandler, errorHandler {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
+	}
+
+    var nextId = 1;
+    $("#add").click(function() {
+        nextId++;
+        var content = "<div data-role='collapsible' id='set" + nextId + "'><h3>Server " + nextId + "</h3><p>Server notifications</p><button type='button' data-icon='arrow-r' data-theme='b' data-iconpos='right' data-mini='true' data-inline='true' id='details'>Details</button></div>";
+		  $("#set").append( content ).trigger('create');
+
+    });
+	
+		$(document).on('click', '#details', function(e){
+		e.preventDefault();
+        console.log('harter');
+		$.mobile.changePage('#page2',{transition: 'slideup'});
+		return false;
+    });
+	
+		$(document).on('click', '#back', function(e){
+		e.preventDefault();
+        console.log('enes');
+		$.mobile.changePage('#page1',{transition: 'slide'});
+		return false;
+    });
+   
+});
+</script>
+
+<title>Echzeitmonitoring - Sulzer GmbH</title>
+</head>
+<body>
+<div data-role="page" id="page1">
+  <div data-theme="a" data-role="header">
+    <h3> Echzeitmonitoring - Sulzer GmbH</h3>
+  </div>
+  <div data-role="content">
+  
+  <button type="button" data-icon="plus" data-theme="b" data-iconpos="left" data-mini="true" data-inline="true" id="add">add server</button>
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="true">
+        <h3>Server 1</h3>
+        <p>Server notifications</p>
+        <button type="button" data-icon="arrow-r" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="details">Details</button>
+    </div>
+</div>
+    </ul>
+  </div>
+</div>
+
+
+
+<div data-role="page" id="page2">
+  <div data-role="header">
+    <h1>Server Details</h1>
+  </div>
+  <!-- /header -->
+  <div data-role="content">
+    <label for="slider-1">Slider with tooltip:</label>
+    <button type="button" data-icon="arrow-l" data-theme="a" data-iconpos="right" data-mini="true" data-inline="true" id="back">back</button>
+    <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50" data-popup-enabled="true">
+  </div>
+</div>
+<!-- /page -->
+</body>
+</html>
