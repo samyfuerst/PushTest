@@ -45,8 +45,7 @@ function errorHandler (error) {
 		alert('aber hallo',e);
    };
 	
-$(document).ready(function(){alert('ready');});
-document.addEventListener('deviceready',function() {
+$(document).ready(function() {
 alert('device ready');
 	pushNotification = window.plugins.pushNotification;
 	pushNotification.register(successHandler, errorHandler,{"senderID":"AIzaSyBmBUVAnclTMnabfLxmbvbaoeeak2YoCbY","ecb":"onNotificationGCM"});
