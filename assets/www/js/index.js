@@ -141,14 +141,16 @@ var app = {
 				try 
 				{ 
                 	pushNotification = window.plugins.pushNotification;
+					alert(device.platform)
                 	if (device.platform == 'android' || device.platform == 'Android') {
 						document.getElementById("app-status-ul").innerHtml='<li>registering android</li>';
                     	pushNotification.register(successHandler, errorHandler, {"senderID":"AIzaSyBmBUVAnclTMnabfLxmbvbaoeeak2YoCbY","ecb":"onNotificationGCM"});		// required!
-						alert('registered')
+						alert('registered android');
 					} else {
 						document.getElementById("app-status-ul").innerHtml='<li>registering iOS</li>';
                     	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-                	}
+						alert('registered ios');
+					}
                 }
 				catch(err) 
 				{ 
