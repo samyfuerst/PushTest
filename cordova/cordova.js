@@ -34,19 +34,17 @@ function exec(command) {
     return output;
 }
 
-function device_running() {
+function emulator_running() {
     var local_devices = shell.Exec("%comspec% /c adb devices").StdOut.ReadAll();
-    if(local_devices.match(/\w+\tdevice/)) {
-        WScript.Echo("Yes");
+    if(local_devices.match(/emulator/)) {
         return true;
     }
-    WScript.Echo("No");
     return false;
 }
 function emulate() {
     // don't run emulator if a device is plugged in or if emulator is already running
-    if(device_running()) {
-        //WScript.Echo("Device or Emulator already running!");
+    if(emulator_running()) {
+        WScript.Echo("Device or Emulator already running!");
         return;
     }
     var oExec = shell.Exec("%comspec% /c android.bat list avd");
@@ -86,18 +84,18 @@ function emulate() {
 }
 
 function clean() {
-    WScript.Echo("Cleaning project...");
     exec("%comspec% /c ant.bat clean -f "+ROOT+"\\build.xml 2>&1");
 }
 
-function build() {
-    WScript.Echo("Building project...");
-    exec("%comspec% /c ant.bat debug -f "+ROOT+"\\build.xml 2>&1");
-}
-
-function install() {
-    WScript.Echo("Building/Installing project...");
-    exec("%comspec% /c ant.bat debug install -f "+ROOT+"\\build.xml 2>&1");
+function debug() {
+   if(emulator_running()) {
+        exec("%comspec% /c ant.bat debug install -f "+ROOT+"\\build.xml 2>&1");
+   } else {
+        exec("%comspec% /c ant.bat debug -f "+ROOT+"\\build.xml 2>&1");
+        WScript.Echo("##################################################################");
+        WScript.Echo("# Plug in your device or launch an emulator with cordova/emulate #");
+        WScript.Echo("##################################################################");
+   }
 }
 
 function log() {
@@ -105,28 +103,14 @@ function log() {
 }
 
 function launch() {
-    WScript.Echo("Launching app...");
     var launch_str=exec("%comspec% /c java -jar "+ROOT+"\\cordova\\appinfo.jar "+ROOT+"\\AndroidManifest.xml");
     //WScript.Echo(launch_str);
     exec("%comspec% /c adb shell am start -n "+launch_str+" 2>&1");
 }
 
-function run() {
-    var i=0;
+function BOOM() {
    clean();
-   emulate();
-   WScript.Stdout.Write('Waiting for device...');
-   while(!device_running() && i < 300) {
-        WScript.Stdout.Write('.');
-        WScript.sleep(1000);
-        i += 1;
-   }
-   if(i == 300) {
-       WScript.Stderr.WriteLine("device/emulator timeout!"); 
-   } else {
-       WScript.Stdout.WriteLine("connected!");
-   }
-   install();
+   debug();
    launch();
 }
 var args = WScript.Arguments;

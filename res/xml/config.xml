@@ -22,15 +22,12 @@
     access elements control the Android whitelist.
     Domains are assumed blocked unless set otherwise
      -->
-
+	
     <access origin="http://127.0.0.1*"/> <!-- allow local pages -->
 
     <!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
     <!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
     <access origin=".*"/>
-
-    <!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
-    <content src="index.html" />
 
     <log level="DEBUG"/>
     <preference name="useBrowserHistory" value="true" />
@@ -54,7 +51,6 @@
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <plugin name="Echo" value="org.apache.cordova.Echo" />
     <plugin name="Globalization" value="org.apache.cordova.Globalization"/>
-    <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser"/>
 	<plugin name="PushPlugin" value="com.plugin.GCM.PushPlugin" />
 </plugins>
 </cordova>

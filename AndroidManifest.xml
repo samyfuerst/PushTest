@@ -18,7 +18,7 @@
        under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:windowSoftInputMode="adjustPan"
-      package="com.example.pushtest" android:versionName="1.0" android:versionCode="1" android:hardwareAccelerated="true">
+      package="com.android.pushtest" android:versionName="1.1" android:versionCode="5" android:hardwareAccelerated="true">
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
@@ -49,14 +49,14 @@
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<uses-permission android:name="android.permission.GET_TASKS" />
-	<permission android:name="your_app_package.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	<uses-permission android:name="com.example.pushtest.C2D_MESSAGE" />
+	<permission android:name="com.android.pushtest.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="com.android.pushtest.permission.C2D_MESSAGE" />
 
 
     <application android:icon="@drawable/icon" android:label="@string/app_name"
         android:hardwareAccelerated="true"
         android:debuggable="true">
-        <activity android:name="PushTest" android:label="@string/app_name"
+        <activity android:name="PushTest2" android:label="@string/app_name"
                 android:theme="@android:style/Theme.Black.NoTitleBar"
                 android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
             <intent-filter>
@@ -64,16 +64,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		
 		<activity android:name="com.plugin.GCM.PushHandlerActivity"/>
 		<receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
 		  <intent-filter>
 			<action android:name="com.google.android.c2dm.intent.RECEIVE" />
 			<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-			<category android:name="com.example.pushtest" />
+			<category android:name="com.android.pushtest" />
 		  </intent-filter>
 		</receiver>
 		<service android:name="com.google.android.gcm.GCMIntentService" />
+		
+		
     </application>
 
     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="17"/>

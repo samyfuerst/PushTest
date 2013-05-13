@@ -17,20 +17,19 @@
        under the License.
  */
 
-package com.example.pushtest;
+package com.android.pushtest;
 
+import android.app.Activity;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class PushTest extends DroidGap
+public class PushTest2 extends DroidGap
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+        super.loadUrl("file:///android_asset/www/index.html");
     }
 }
 
