@@ -16,6 +16,11 @@ PushNotification.prototype.register = function(successCallback, errorCallback, o
         console.log("PushNotification.register failure: success callback parameter must be a function");
         return
     }
+	
+	for(var p in PhoneGap)
+	console.log(p,PhoneGap[p])
+	
+	alert(cordova.exec);
 
 	cordova.exec(successCallback, errorCallback, "PushPlugin", "register", [options]);
 };
