@@ -17,10 +17,8 @@ PushNotification.prototype.register = function(successCallback, errorCallback, o
         return
     }
 	
-	for(var p in PhoneGap)
-	console.log(p,PhoneGap[p])
 	
-	console.log(cordova.exec);
+	alert(cordova.exec);
 
 	cordova.exec(successCallback, errorCallback, "PushPlugin", "register", [options]);
 };
