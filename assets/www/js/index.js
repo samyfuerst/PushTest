@@ -119,7 +119,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		alert('enes')
 		document.getElementById("app-status-ul").addChild('<li>deviceready event received</li>');
                 
 				document.addEventListener("backbutton", function(e)
@@ -144,7 +143,8 @@ var app = {
                 	pushNotification = window.plugins.pushNotification;
                 	if (device.platform == 'android' || device.platform == 'Android') {
 						document.getElementById("app-status-ul").innerHtml='<li>registering android</li>';
-                    	pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});		// required!
+                    	pushNotification.register(successHandler, errorHandler, {"senderID":"AIzaSyBmBUVAnclTMnabfLxmbvbaoeeak2YoCbY","ecb":"onNotificationGCM"});		// required!
+						alert('registered')
 					} else {
 						document.getElementById("app-status-ul").innerHtml='<li>registering iOS</li>';
                     	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
