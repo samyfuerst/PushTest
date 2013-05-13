@@ -47,6 +47,7 @@ function errorHandler (error) {
 	
 $(document).ready(function() {
 alert('device ready');
+	console.log('hm hm hm')
 	pushNotification = window.plugins.pushNotification;
 	pushNotification.register(successHandler, errorHandler,{"senderID":"AIzaSyBmBUVAnclTMnabfLxmbvbaoeeak2YoCbY","ecb":"onNotificationGCM"});
 	
